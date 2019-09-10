@@ -6,6 +6,8 @@ from core import models
 
 
 class UserAdmin(BaseUserAdmin):
+    """custom user model instead of default test_user_change_page"""
+    """add_fieldsets are for test_create_user_page """
     ordering = ['id']
     list_display = ['email', 'name']
     fieldsets = (
@@ -27,3 +29,5 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.register(models.User, UserAdmin)
 admin.site.register(models.Tag)
+admin.site.register(models.Ingredient)
+admin.site.register(models.Recipe)

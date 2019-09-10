@@ -28,7 +28,9 @@ class PublicUserApiTests(TestCase):
             'password': 'roshan',
             'name': 'Test name'
         }
+        """ Creates a post request to client(create a user) """
         res = self.client.post(CREATE_USER_URL, payload)
+
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
         user = get_user_model().objects.get(**res.data)
         self.assertTrue(user.check_password(payload['password']))
@@ -127,7 +129,7 @@ class PrivateUserApiTests(TestCase):
 
         res = self.client.patch(ME_URL, payload)
 
-        self.user.refresh_from_db()
+        self.user.refresh_from_db() #update db with new values
         self.assertEqual(self.user.name, payload['name'])
         self.assertTrue(self.user.check_password(payload['password']))
         self.assertEqual(res.status_code, status.HTTP_200_OK)
